@@ -1,0 +1,119 @@
+/* Navbar */
+/* HTML and Body */
+html,
+body {
+  font-family: Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+#navbar {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+}
+
+/* Landing Section */
+#landing-bg {
+  background-image: url("dashboard.png");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+/* Form Section */
+.content {
+  max-width: 60%;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 5%;
+  margin-top: 4%;
+  padding: 3%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Form */
+form {
+  text-align: center;
+  margin-right: 5%;
+}
+
+/* Text Glow */
+.glow {
+  color: rgb(255, 196, 35);
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+  text-shadow: 0 0 10px orange, 0 0 20px orange;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+/* Question Labels */
+label {
+  display: inline-block;
+  clear: left;
+  width: 200px;
+  text-align: right;
+}
+/* Input / Text Area */
+input,
+textarea {
+  display: inline-block;
+  filter: opacity(75%);
+  width: 60%;
+  margin-left: 2%;
+}
+
+/* Custom Button */
+.custom-btn {
+  width: 200px;
+  height: 40px;
+  padding: 10px 25px;
+  font-family: "Lato", sans-serif;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  border: 1px solid #fff352;
+  box-shadow: 0 0 5px #fff352, 0 0 5px #fff352 inset;
+  z-index: 2;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.custom-btn:hover {
+  background-color: rgba(0, 0, 0, 25);
+}
+
+/* Experience Styling Alignment */
+#experienceStyling {
+  width: 100%;
+}
+#experienceStyling label {
+  text-align: right;
+  margin-right: 2.5%;
+}
+
+/* Error Styling */
+.error {
+  color: red;
+  text-shadow: none;
+  border: none;
+}
