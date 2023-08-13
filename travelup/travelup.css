@@ -300,11 +300,33 @@ button:hover {
   font-size: 24px;
 }
 
+/* Current Ship Text */
 #current-ship {
   font-size: 25px;
   color: black;
 }
 
+/* Error Message */
+#errorMessage {
+    font-size: 18px;
+    color: red;
+    text-align: left;
+}
+
+/* Container */
+.container{
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+.container button{
+    display: flex-box;
+    padding: 2.3%;
+    width: 18%;
+    justify-content: center;
+    align-items: center;
+    margin: 1.2% 3.3% 0% 3.3%;
+}
 /* Media Query for Smaller Screens */
 @media screen and (max-width: 992px) {
   #sectImgs,
