@@ -35,15 +35,90 @@ h5 {
 
 /* Navbar */
 #navbar {
-  position: absolute;
+  position: fixed;
   width: 100%;
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 0;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
+/* Time Display */
+.time-display {
+  font-size: 60px;
+  margin-top: 15%;
+}
+/* Time Display Styling */
+.navItem {
+  right: 5px;
+  position: absolute;
+  font-size: 15px;
+}
+/* Countdown Timer */
+#countdown-timer {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  padding: 4px;
+  border: 1.5px solid rgba(0, 0, 0, 0.5);
+}
+#countdown-timer:visited {
+  color: black;
+}
+#countdown-timer:hover {
+  animation-name: shine;
+  animation-duration: 260ms;
+}
+@keyframes shine {
+  0% {
+    background: linear-gradient(
+      30deg,
+      hsl(260, 85%, 95%) 0%,
+      hsla(0, 0%, 0%, 0) 25%
+    );
+  }
 
+  25% {
+    background: linear-gradient(
+      30deg,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsl(260, 85%, 95%) 25%,
+      hsla(0, 0%, 0%, 0) 50%
+    );
+  }
+
+  50% {
+    background: linear-gradient(
+      30deg,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsl(260, 85%, 95%) 50%,
+      hsla(0, 0%, 0%, 0) 75%
+    );
+  }
+
+  75% {
+    background: linear-gradient(
+      30deg,
+      hsla(0, 0%, 0%, 0) hsl(260, 90%, 40%) 0%,
+      hsl(260, 85%, 95%) 75%,
+      hsla(0, 0%, 0%, 0) 100%
+    );
+  }
+
+  100% {
+    background: linear-gradient(
+      30deg,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsl(260, 85%, 95%) 100%
+    );
+  }
+}
 /* Section Images */
 #sectImgs {
   width: 500px;
@@ -173,6 +248,15 @@ button:hover {
   float: left;
   width: 100%;
 }
+
+.center-countdown {
+  text-align: center !important;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25%;
+}
+
 .center {
   text-align: center !important;
   display: flex;
@@ -204,6 +288,11 @@ button:hover {
 /* Enlarge Icons */
 .i-large {
   font-size: 24px;
+}
+
+#current-ship {
+  font-size: 25px;
+  color: black;
 }
 
 /* Media Query for Smaller Screens */
