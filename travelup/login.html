@@ -1,17 +1,28 @@
-<!--
 <?php
-// Start PHP session
-session_start();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Process the submitted form data (authentication)
+    $errorMessage = "";
     
-    // Redirect to the home page
-    header("Location: travelup.php");
-    exit(); // Important: Terminate the script to prevent further execution
-}
+    if ($_SERVER["REQUEST_METHOD"]=="POST"){
+        session_start();
+        require_once('dbconnect.php');
+        
+        $username = $_POST["userID"];
+        $password = $_POST["password"];
+        
+        $sql = "SELECT * FROM tblUsers WHERE username = '$username' AND password = '$password'";
+        $result = mysqli_query($conn, $sql);
+        $check = mysqli_fetch_array($result);
+        
+        if(isset($check)){
+            $_SESSION['id'] = session_id();
+            $_SESSION['isLoggedIn'] = 'true';
+            $_SESSION['username'] = $check["username"];
+            
+            header('Location: employeeintranet.php');
+        } else {
+            $errorMessage = "Login failed";
+        }
+    }
 ?>
--->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,11 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header id="landing-bg">
       <!-- Heading for the login page -->
       <h3 style="text-align: left">Login Page</h3>
+      <div id="errorMessage">
+          <?php
+          echo $errorMessage
+          ?>
+      </div>
       <!-- Form for user login -->
       <form
         name="loginForm"
-        onsubmit="return validateForm()"
         method="post"
+        action="login.php"
         style="
           border: 2px solid black;
           width: 95%;
@@ -46,13 +62,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           padding: 2.5%;
         "
       >
-        <!-- Username input field -->
+        <!-- userID input field -->
         <label
-          for="username"
+          for="userID"
           style="display: inline-block; text-align: left; width: 100%"
-          >Username:</label
+          >userID:</label
         >
-        <input type="text" id="username" name="username" /><br /><br />
+        <input type="text" id="userID" name="userID" required/><br /><br />
 
         <!-- Password input field -->
         <label
@@ -60,12 +76,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           style="display: inline-block; text-align: left; width: 100%"
           >Password:</label
         >
-        <input type="text" id="password" name="password" /><br /><br />
+        <input type="text" id="password" name="password"  required/><br /><br />
 
         <!-- Submit button for the login form -->
         <input type="submit" value="Login" />
       </form>
     </header>
-    <script src="login.js"></script>
+        <script src="login.js"></script>
   </body>
 </html>
