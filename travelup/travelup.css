@@ -56,9 +56,19 @@ h5 {
 }
 /* Time Display Styling */
 .navItem {
-  right: 5px;
   position: absolute;
   font-size: 15px;
+}
+.timer {
+  right: 9%;
+}
+.profile {
+  right: 1%;
+  filter: opacity(65%);
+  margin-top: -23px;
+}
+.profile:hover {
+  filter: opacity(85%);
 }
 /* Countdown Timer */
 #countdown-timer {
