@@ -1,4 +1,4 @@
-<!--<?php
+<?php
     session_start();
     
     $welcomeMessage = "";
@@ -8,7 +8,7 @@
     } else {
         header('Location: login.php');
     }
-?>-->
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
