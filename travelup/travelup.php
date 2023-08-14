@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="travelup.css" />
   </head>
   <body>
-    <!-- Navbar -->
+        <!-- Navbar -->
     <div id="navbar">
       <img src="travelup.png" style="width: 110px; height: 40px;"/ >
-      <a href="countdown.html" id="countdown-timer" class="navItem timer"></a>
+      <a href="countdown.php" id="countdown-timer" class="navItem timer"></a>
       <a href="login.php"
         ><img
           src="spaceman.png"
@@ -207,7 +207,7 @@
     <footer class="padding-16" style="margin-left: 3%">
       <p>Website by Frances Caldwell</p>
       <span
-        ><a href="application.html"
+        ><a href="application.php"
           >Apply to be a Pilot on the Celestial Frontier</a
         ></span
       >
