@@ -1,0 +1,86 @@
+body {
+  font-family: Arial;
+  color: black;
+}
+
+/* Split layout for the header section */
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Left side of the split layout */
+.left {
+  left: 0;
+  /* Gradient background with multiple colors */
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(255, 87, 51, 1) 0%,
+    rgba(90, 75, 202, 1) 100%
+  );
+}
+
+/* Right side of the split layout */
+.right {
+  right: 0;
+  background-color: white;
+}
+
+/* Centered content within the split sections */
+.centered {
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Styling for the background image section */
+.background {
+  background-image: url("sunrise.jpg");
+  border-radius: 5%;
+  border: white solid 5px;
+  width: 80%;
+  height: 80%;
+}
+
+/* Styling for the heading */
+h2 {
+  position: absolute;
+  bottom: 50%;
+  background-color: black;
+  color: white;
+}
+
+/* Styling for buttons */
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 18px;
+  width: 95%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  height: 5vh;
+}
+
+/* Styling for purple background buttons */
+.purple-bg {
+  background-color: rgb(90, 75, 202);
+}
+
+/* Styling for red background buttons */
+.red-bg {
+  background-color: rgb(255, 87, 51);
+}
