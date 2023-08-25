@@ -3,7 +3,7 @@
 $errorMessage = "";
 
 // Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"]=="POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Start a session and include the database connection
     session_start();
     require_once('dbconnect.php');
@@ -12,24 +12,25 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $username = $_POST["userID"];
     $password = $_POST["password"];
 
-    // Query to fetch the hashed password for the provided username
-    $hashQuery = "SELECT password FROM tblUsers WHERE username = ?";
-    $hashStmt = mysqli_prepare($conn, $hashQuery);
-    mysqli_stmt_bind_param($hashStmt, "s", $username);
-    mysqli_stmt_execute($hashStmt);
-    $hashResult = mysqli_stmt_get_result($hashStmt);
-    
+    // Query to fetch the hashed password and user_id for the provided username
+    $userQuery = "SELECT user_id, password FROM tblUsers WHERE username = ?";
+    $userStmt = mysqli_prepare($conn, $userQuery);
+    mysqli_stmt_bind_param($userStmt, "s", $username);
+    mysqli_stmt_execute($userStmt);
+    $userResult = mysqli_stmt_get_result($userStmt);
+
     // Check if a user with the given username exists
-    if (mysqli_num_rows($hashResult) > 0) {
-        $hashRow = mysqli_fetch_assoc($hashResult);
-        $hashedPassword = $hashRow["password"];
-        
+    if ($userRow = mysqli_fetch_assoc($userResult)) {
+        $hashedPassword = $userRow["password"];
+        $user_id = $userRow["user_id"];
+
         // Verify the entered password against the stored hashed password
         if (password_verify($password, $hashedPassword)) {
             $_SESSION['id'] = session_id();
-            $_SESSION['isLoggedIn'] = 'true';
+            $_SESSION['isLoggedIn'] = true;
             $_SESSION['username'] = $username;
-            
+            $_SESSION['user_id'] = $user_id; // Store the user_id in the session
+
             // Redirect the user to the home page
             header('Location: home.php');
         } else {
