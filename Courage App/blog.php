@@ -31,7 +31,7 @@
       src="https://cdn.tiny.cloud/1/luxa1befilmgrfy9trl4gs9944diyr5cls8ily2nhih3vao4/tinymce/6/tinymce.min.js"
       referrerpolicy="origin"
     ></script>
-      <!-- Blog JavaScript File -->
+              <!-- Blog JavaScript File -->
 <script src="blog.js"></script>
   </head>
   <body>
@@ -128,5 +128,12 @@
         </div>
       </div>
     </div>
+    <script>
+  document.querySelector('form').addEventListener('submit', function () {
+    const editor = tinymce.get('editor');
+    const editorContentInput = document.getElementById('editorContent');
+    editorContentInput.value = editor.getContent();
+  });
+</script>
   </body>
 </html>
