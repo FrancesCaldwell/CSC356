@@ -1,73 +1,62 @@
 <?php
-// Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-// Include the database connection file
 require_once('dbconnect.php');
 
-// Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get data from the form inputs
-    $title = $_POST["title"];
-    $challengeType = $_POST["item"]; // Get the selected challenge type
+    session_start();
+    if (!isset($_SESSION['user_id'])) {
+        echo "User ID not found.";
+        exit();
+    }
+    $user_id = $_SESSION['user_id'];
 
-    // Validate title and content
+    $title = $_POST["title"];
+    $challengeType = $_POST["item"];
     $errors = [];
 
     if (empty($title)) {
         $errors[] = "Title is required.";
     }
-
-    // Retrieve content from the hidden input
+    
     $content = $_POST["editorContent"];
     if (empty($content)) {
         $errors[] = "Content is required.";
     }
 
     if (!empty($errors)) {
-        // Display error messages
         foreach ($errors as $error) {
             echo "Error: $error <br>";
         }
         exit();
     }
 
-    // Get the uploaded image file
     $imageFileName = null;
 
     if ($_FILES['bimgs']['error'] === UPLOAD_ERR_OK) {
         $imageFileName = $_FILES['bimgs']['name'];
         $imageTempPath = $_FILES['bimgs']['tmp_name'];
-
-        // Define the target directory for image uploads
         $targetDir = 'images/';
         $targetPath = $targetDir . $imageFileName;
-
-        // Move the uploaded image to the target directory
         if (!move_uploaded_file($imageTempPath, $targetPath)) {
             echo "Error moving uploaded image.";
             exit();
         }
     }
 
-    // Decode the JSON-encoded tags from the hidden input
     $tags = json_decode($_POST["tags"], true);
 
-    // Insert data into the blog_posts table using prepared statement
-    $sql = "INSERT INTO tblBlogPosts (title, content, challenge_type, image_file_name) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO tblBlogPosts (user_id, title, content, challenge_type, image_file_name) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     if (!$stmt) {
         echo "Error creating prepared statement: " . mysqli_error($conn);
         exit();
     }
-    mysqli_stmt_bind_param($stmt, "ssss", $title, $content, $challengeType, $imageFileName);
+    mysqli_stmt_bind_param($stmt, "issss", $user_id, $title, $content, $challengeType, $imageFileName);
 
     if (mysqli_stmt_execute($stmt)) {
-        // Get the last inserted blog_id
         $blogId = mysqli_insert_id($conn);
 
-        // Insert tags into the tags table using prepared statement
         if (!empty($tags)) {
             $tagSql = "INSERT INTO tblTags (blog_id, tag_name) VALUES (?, ?)";
             $tagStmt = mysqli_prepare($conn, $tagSql);
@@ -81,7 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($tagStmt);
         }
 
-        // Redirect or show a success message
         header("Location: home.php");
         exit();
     } else {
@@ -92,7 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <script>
-// Assuming "editor" is the ID of your TinyMCE editor
 tinymce.init({
   selector: '#editor',
   setup: function (editor) {
