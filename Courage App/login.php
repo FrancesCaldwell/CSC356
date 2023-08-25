@@ -1,35 +1,46 @@
 <?php
-    // Initialize an empty error message
-    $errorMessage = "";
+// Initialize an empty error message
+$errorMessage = "";
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"]=="POST"){
+    // Start a session and include the database connection
+    session_start();
+    require_once('dbconnect.php');
+
+    // Get the submitted username and password
+    $username = $_POST["userID"];
+    $password = $_POST["password"];
+
+    // Query to fetch the hashed password for the provided username
+    $hashQuery = "SELECT password FROM tblUsers WHERE username = ?";
+    $hashStmt = mysqli_prepare($conn, $hashQuery);
+    mysqli_stmt_bind_param($hashStmt, "s", $username);
+    mysqli_stmt_execute($hashStmt);
+    $hashResult = mysqli_stmt_get_result($hashStmt);
     
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        // Start a session and include the database connection
-        session_start();
-        require_once('dbconnect.php');
+    // Check if a user with the given username exists
+    if (mysqli_num_rows($hashResult) > 0) {
+        $hashRow = mysqli_fetch_assoc($hashResult);
+        $hashedPassword = $hashRow["password"];
         
-        // Get the submitted username and password
-        $username = $_POST["userID"];
-        $password = $_POST["password"];
-        
-        // Query to check if the username and password match
-        $sql = "SELECT * FROM tblUsers WHERE username = '$username' AND password = '$password'";
-        $result = mysqli_query($conn, $sql);
-        $check = mysqli_fetch_array($result);
-        
-        // If the query result contains a match, log the user in
-        if(isset($check)){
+        // Verify the entered password against the stored hashed password
+        if (password_verify($password, $hashedPassword)) {
             $_SESSION['id'] = session_id();
             $_SESSION['isLoggedIn'] = 'true';
-            $_SESSION['username'] = $check["username"];
+            $_SESSION['username'] = $username;
             
             // Redirect the user to the home page
             header('Location: home.php');
         } else {
             // Set an error message if login fails
-            $errorMessage = "Login failed";
+            $errorMessage = "Invalid username or password";
         }
+    } else {
+        // Set an error message if the username does not exist
+        $errorMessage = "Invalid username or password";
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +98,7 @@
             <label
               for="userID"
               style="display: inline-block; text-align: left; width: 100%"
-              >userID:</label
+              >Username:</label
             >
             <input
               type="text"
@@ -116,7 +127,8 @@
             <!-- Horizontal divider -->
             <p>--------------------- OR ---------------------</p>
             <!-- Submit button for sign up -->
-            <input type="submit" class="button purple-bg" value="Sign Up" />
+            <a href="signup.php">
+            <input class="button purple-bg" value="Sign Up" /> <a/>
           </form>
         </div>
       </div>
