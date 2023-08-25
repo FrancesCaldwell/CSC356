@@ -10,12 +10,26 @@ require_once('dbconnect.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get data from the form inputs
     $title = $_POST["title"];
-    $content = $_POST["editorContent"]; // Using the hidden field for content
     $challengeType = $_POST["item"]; // Get the selected challenge type
 
     // Validate title and content
-    if (empty($title) || empty($content)) {
-        echo "Error: Title and content are required.";
+    $errors = [];
+
+    if (empty($title)) {
+        $errors[] = "Title is required.";
+    }
+
+    // Retrieve content from the hidden input
+    $content = $_POST["editorContent"];
+    if (empty($content)) {
+        $errors[] = "Content is required.";
+    }
+
+    if (!empty($errors)) {
+        // Display error messages
+        foreach ($errors as $error) {
+            echo "Error: $error <br>";
+        }
         exit();
     }
 
@@ -77,3 +91,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_close($stmt);
 }
 ?>
+<script>
+// Assuming "editor" is the ID of your TinyMCE editor
+tinymce.init({
+  selector: '#editor',
+  setup: function (editor) {
+    editor.on('change', function () {
+      editor.save();
+    });
+  }
+});
+</script>
