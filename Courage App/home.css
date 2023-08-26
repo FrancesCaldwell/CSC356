@@ -155,6 +155,43 @@ p {
  font-size: 1.25vw;
 }
 
+/* Style for the like button */
+.like-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: black; /* Default color */
+}
+
+/* Default button and heart icon styles */
+.like-button {
+    position: relative;
+    cursor: pointer;
+        position: absolute;
+    top: 8%;
+    right:0;
+}
+
+.like-button i.fa-heart {
+    color: black; /* Default color */
+    transition: color 0.3s; /* Smooth transition effect */
+        position: absolute;
+    top: 8%;
+    right:0;
+}
+
+/* Liked button and heart icon styles */
+.like-button.liked i.fa-heart {
+    color: rgb(90, 75, 202);
+}
+
+/* Remove default outline on focus */
+.like-button:focus {
+    outline: none;
+}
+
+
 /* Media query for smaller screens */
 @media screen and (max-width: 600px) {
   .topnav a,
