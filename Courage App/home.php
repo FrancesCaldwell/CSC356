@@ -36,8 +36,8 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == 'true'){
         <a class="active" href="blog.php">
             <img src="post.png" style="width: 55px; height: 45px">
         </a>
-        <a href="#drafts" class="navtext">Drafts</a>
-        <a href="#saved" class="navtext">Saved</a>
+        <a href="home.php" class="navtext">Home</a>
+        <a href="saved.php" class="navtext">Saved</a>
         <a href="#profile" class="split">
             <i class="fa fa-user" style="font-size: 30px"></i>
         </a>
@@ -62,5 +62,58 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == 'true'){
         <?php include 'display_blog_content.php'; ?>
     </div>
     <script src="tabs.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+
+    var likeButtons = document.querySelectorAll('.like-button');
+
+    likeButtons.forEach(function(button) {
+        var blogId = button.getAttribute('data-blogid');
+        var heartIcon = button.querySelector('i.fa-heart');
+
+        // Check if the current post is liked and apply styles if necessary
+        if (likedPosts.includes(blogId)) {
+            button.classList.add('liked');
+            heartIcon.classList.add('fas'); // Add filled heart class
+            heartIcon.classList.add('liked');
+        } else {
+            button.classList.remove('liked');
+            heartIcon.classList.remove('fas'); // Remove filled heart class
+            heartIcon.classList.remove('liked');
+        }
+
+        button.addEventListener('click', function() {
+            likeBlogPost(blogId);
+        });
+    });
+
+    function likeBlogPost(blogId) {
+        var index = likedPosts.indexOf(blogId);
+        if (index === -1) {
+            likedPosts.push(blogId);
+        } else {
+            likedPosts.splice(index, 1);
+        }
+        localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+        console.log("Liked posts:", likedPosts);
+        // Update button and heart icon classes after liking/unliking
+        likeButtons.forEach(function(button) {
+            var buttonBlogId = button.getAttribute('data-blogid');
+            var heartIcon = button.querySelector('i.fa-heart');
+
+            if (likedPosts.includes(buttonBlogId)) {
+                button.classList.add('liked');
+                heartIcon.classList.add('fas'); // Add filled heart class
+                heartIcon.classList.add('liked');
+            } else {
+                button.classList.remove('liked');
+                heartIcon.classList.remove('fas'); // Remove filled heart class
+                heartIcon.classList.remove('liked');
+            }
+        });
+    }
+});
+    </script>
 </body>
 </html>
