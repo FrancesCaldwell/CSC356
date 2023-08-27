@@ -142,7 +142,7 @@ body {
 
 /* Style content divs */
 #followingContent,
-#foryouContent {
+#foryouContent, #liked-posts-container {
     border: 1px solid gray;
     padding: 2.5%;
   border-right-style: none;
@@ -155,22 +155,13 @@ p {
  font-size: 1.25vw;
 }
 
-/* Style for the like button */
-.like-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: black; /* Default color */
-}
-
 /* Default button and heart icon styles */
 .like-button {
-    position: relative;
     cursor: pointer;
         position: absolute;
     top: 8%;
     right:0;
+    border: none;
 }
 
 .like-button i.fa-heart {
@@ -191,6 +182,21 @@ p {
     outline: none;
 }
 
+/* Define styles for liked buttons */
+.like-button.liked {
+    color: purple; /* Change to your desired color */
+    /* Other styles you want for the liked state */
+}
+
+/* Define styles for liked heart icons */
+.like-button.liked i.fa-heart {
+    color: purple; /* Change to your desired color */
+    /* Other styles you want for the liked state */
+}
+
+body.saved-page .like-button.active .fa-heart {
+    color: purple;
+}
 
 /* Media query for smaller screens */
 @media screen and (max-width: 600px) {
