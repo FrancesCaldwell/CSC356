@@ -65,6 +65,7 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == 'true'){
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     var likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+    var likedPostTags = {}; // Declare the object to store liked post tags
 
     var likeButtons = document.querySelectorAll('.like-button');
 
@@ -84,19 +85,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         button.addEventListener('click', function() {
-            likeBlogPost(blogId);
+            likeBlogPost(blogId, likedPostTags[blogId]); // Pass the associated tags
         });
     });
 
-    function likeBlogPost(blogId) {
+    function likeBlogPost(blogId, tags) {
         var index = likedPosts.indexOf(blogId);
+
         if (index === -1) {
             likedPosts.push(blogId);
+            likedPostTags[blogId] = tags; // Store the tags for this liked post
         } else {
             likedPosts.splice(index, 1);
+            delete likedPostTags[blogId]; // Remove tags for unliked post
         }
+
         localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-        console.log("Liked posts:", likedPosts);
+
         // Update button and heart icon classes after liking/unliking
         likeButtons.forEach(function(button) {
             var buttonBlogId = button.getAttribute('data-blogid');
@@ -112,6 +117,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 heartIcon.classList.remove('liked');
             }
         });
+
+        console.log("Liked posts:", likedPosts);
+        
+        // Function to fetch tags for a liked post (implement this function)
+    function getTagsForLikedPost(blogId) {
+        // You need to implement this function to fetch the tags for a liked post
+        // You can use AJAX or any method you prefer to retrieve the tags
+        // Return the tags associated with the blogId
+        // For now, I'm assuming you have a placeholder implementation
+        return likedPostTags[blogId] || [];
+    }
+
+    // Your existing AJAX code for the "For You" tab
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'foryou.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = xhr.responseText;
+            // Update the HTML content using JavaScript
+            document.getElementById('foryou-posts-container').innerHTML = response;
+        }
+    };
+
+    // Modify this part to send the liked post tags
+    var postData = 'likedPostTags=' + JSON.stringify(likedPostTags); // Send liked post tags
+    xhr.send(postData);
     }
 });
     </script>
