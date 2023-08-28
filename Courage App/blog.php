@@ -35,6 +35,8 @@
 <script src="blog.js"></script>
   </head>
   <body>
+              <!-- Add a back button to navigate back to the home page -->
+    <a id="back-button" href="home.php">←</a>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
