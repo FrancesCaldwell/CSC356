@@ -17,7 +17,7 @@
         </a>
         <a href="home.php" class="navtext">Home</a>
         <a href="saved.php" class="navtext">Saved</a>
-        <a href="#profile" class="split">
+        <a href="profile.php" class="split">
             <i class="fa fa-user" style="font-size: 30px"></i>
         </a>
         <a href="#messages" class="split">
@@ -89,18 +89,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Make an AJAX request to retrieve liked posts content
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'get_liked_posts.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = xhr.responseText;
-            // Update the HTML content using JavaScript
-            document.getElementById('liked-posts-container').innerHTML = response;
-        }
-    };
-    var postData = 'likedPosts=' + JSON.stringify(likedPosts);
-    xhr.send(postData);
+
+    if (likedPosts.length > 0) {
+        xhr.open('POST', 'get_liked_posts.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                // Update the HTML content using JavaScript
+                document.getElementById('liked-posts-container').innerHTML = response;
+            }
+        };
+        var postData = 'likedPosts=' + JSON.stringify(likedPosts);
+        xhr.send(postData);
+    }
 });
+
     </script>
 </body>
 </html>
