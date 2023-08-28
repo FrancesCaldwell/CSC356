@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style individual blog posts */
+.page-container {
+    box-sizing: border-box;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+    width: 100% !important;
+  border: 2px solid #eeeeee;
+  margin-left: auto;
+    margin-right: auto;
+    padding: 0% 2% 2% 2%;
+}
+/* Updated profile.css */
+
+/* Style the blog posts container */
+.blog-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Style individual blog posts */
+.blog-post {
+    margin-bottom: 2.5%;
+    text-align: center;
+    flex-basis: calc(33.33% - 2.5%); /* Display 3 posts per row with spacing */
+    max-height: 300px;
+    overflow: hidden;
+    line-height: 0.2;
+    position: relative;
+    text-align: left;
+    background-color: #F9F9F9;
+}
+
+/* Style images within blog posts */
+.blog-post img {
+    max-width: 100%;
+    height: 500px;
+    height: auto;
+}
+
+/* Style content divs */
+#user-posts-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2.5%;
+    border: 1px solid gray;
+    border-right-style: none;
+    border-left-style: none;
+}
+
+
+/* Highlight blog posts on hover */
+.blog-post:hover {
+  filter: opacity(0.9);
+}
+
+/* Style headings within blog posts */
+.blog-post h6 {
+  font-size: 1.5vw;
+}
+
+a{
+    margin-left: 5%;
+    font-size: 40px;
+      text-decoration: none;
+}
