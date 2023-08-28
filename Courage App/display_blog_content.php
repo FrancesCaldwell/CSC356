@@ -17,6 +17,8 @@ echo "<div class='blog-container'>";
 
 // Loop through each row in the result set
 while ($row = mysqli_fetch_assoc($result)) {
+    // Open the anchor tag for the individual blog post
+    echo "<a href='challenge.php?post_id={$row['blog_id']}' class='blog-post'>";
     echo "<div class='blog-post'>";
     
     // Display title, username, and created date
@@ -49,6 +51,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     // Close the individual blog post div
     echo "</div>";
+    
+        echo "</a>";
 }
 
 // Close the container
