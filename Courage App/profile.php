@@ -8,7 +8,6 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
     exit;
 }
 
-// Include your database connection and other dependencies
 require_once('dbconnect.php');
 
 // Retrieve logged-in user's username
