@@ -1,7 +1,6 @@
 <?php
 // Include your database connection and other dependencies
 require_once('dbconnect.php');
-// ...
 
 // Get the post ID from the URL parameter
 if (isset($_GET['post_id'])) {
