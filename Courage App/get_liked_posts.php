@@ -16,7 +16,7 @@ $html = "<div class='blog-container'>";
 
 // Loop through each row in the result set
 while ($row = mysqli_fetch_assoc($likedPostsResult)) {
-    $html .= "<div class='blog-post'>";
+    $html .= "<a href='challenge.php?post_id={$row['blog_id']}' class='blog-post'>";
     $html .= "<h6>{$row['title']}</h6>";
     $html .= "<p>@{$row['username']}</p>";
     $formattedCreatedAt = date("F j, Y", strtotime($row['created_at']));
@@ -31,7 +31,7 @@ while ($row = mysqli_fetch_assoc($likedPostsResult)) {
     // Like button
     $html .= "<button class='like-button active ' data-blogid='{$row['blog_id']}'><i class='fa fa-heart'></i></button>";
 
-    $html .= "</div>";
+    $html .= "</a>";
 }
 
 // Close the container
