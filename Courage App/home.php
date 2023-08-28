@@ -38,7 +38,7 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == 'true'){
         </a>
         <a href="home.php" class="navtext">Home</a>
         <a href="saved.php" class="navtext">Saved</a>
-        <a href="#profile" class="split">
+        <a href="profile.php" class="split">
             <i class="fa fa-user" style="font-size: 30px"></i>
         </a>
         <a href="#messages" class="split">
