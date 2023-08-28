@@ -1,0 +1,276 @@
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(90, 75, 202) !important;
+  border: 1px solid rgb(90, 75, 202) !important;
+}
+
+.btn-file:disabled {
+  background-color: rgba(90, 75, 202, 0.5) !important;
+  border: 1px solid rgb(90, 75, 202, 0.5) !important;
+}
+
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+a {
+    margin-left: 5%;
+    font-size: 40px;
+      text-decoration: none;
+}
+
+#back-button {
+    margin-left: 5%;
+    font-size: 40px;
+      text-decoration: none;
+}
+
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+details {
+  position: relative;
+  width: 100%;
+  margin-right: 1rem;
+}
+
+details[open] {
+  z-index: 1;
+}
+
+summary {
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #ddd;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary:before {
+  content: "";
+  display: block;
+  height: 100vh;
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+summary:after {
+  content: "";
+  display: inline-block;
+  float: right;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-bottom: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  border-bottom-left-radius: 2px;
+  transform: rotate(45deg) translate(50%, 0%);
+  transform-origin: center center;
+  transition: transform ease-in-out 100ms;
+  margin-top: 8%;
+}
+
+summary:focus {
+  outline: none;
+}
+
+details[open] summary:after {
+  transform: rotate(-45deg) translate(0%, 0%);
+}
+
+/* this is only due to codepen display don't use this outside of codepen */
+.container {
+  padding-top: 20px;
+  width: 50% !important;
+  border: 2px solid #eeeeee;
+}
+
+li {
+  margin: 0;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  background-color: white;
+  list-style-type: none;
+}
+
+li:hover {
+  background-color: #eee;
+}
+
+li:first-child {
+  padding-top: 0;
+}
+
+li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* FAKE SELECT */
+
+summary.radios {
+  counter-reset: radios;
+  background-color: white;
+  width: 40%;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  padding: 1%;
+  height: 30px;
+}
+
+summary.radios:before {
+  content: var(--selection);
+}
+
+input[type="radio"] {
+  counter-increment: radios;
+  appearance: none;
+  display: none;
+
+}
+
+input[type="radio"]:checked {
+  display: inline;
+  color: #333;
+  font-weight: bold;
+}
+
+input[type="radio"]:after {
+  content: attr(title);
+  display: inline;
+  font-size: 1rem;
+}
+
+ul.list {
+  counter-reset: labels;
+  padding-left: 0px;
+  border: 1px solid #eee;
+  width: 40%;
+  color: rgb(132, 132, 132);
+  padding-left: 1%;
+  font-size: 12px;
+}
+
+label {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+  font-weight: normal !important;
+}
+
+label span {
+  display: var(--display);
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #727272;
+  border-radius: 3px;
+}
+
+#challenge-type-error {
+    margin-bottom: 1%;
+    margin-top: -2%;
+}
+
+#title-error, #image-error {
+    margin-top: 2%;
+}
+
+.tags-input {
+  display: inline-block;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  width: 40%;
+  height: 2%;
+  margin-left: 25%;
+}
+
+.tags-input ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tags-input li {
+  display: inline-block;
+  background-color: #f2f2f2;
+  color: #333;
+  border-radius: 10px;
+  padding: 0px 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.tags-input input[type="text"] {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+  width: 95%;
+  height: 100%;
+}
+
+.tags-input input[type="text"]:focus {
+  outline: none;
+}
+
+.tags-input .delete-button {
+  background-color: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+#default {
+  font-weight: normal;
+}
+
+#input-tag::placeholder {
+  color: #ccc;
+}
+
+.image-preview-wrapper {
+    display: none; /* Hide the wrapper initially */
+  width: 100%; /* Takes up the full width of the container */
+  height: 500px;
+  border: 1px solid black;
+  box-sizing: border-box; /* Include padding and border in the width */
+  overflow: hidden; /* Prevents image from overflowing */
+}
+
+.image-preview {
+  width: 100%; /* Fills the width of the wrapper */
+  height: 100%; /* Fills the height of the wrapper */
+  background-size: contain; /* Adjusts the background image to fit within the dimensions without cropping */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-position: center; /* Center the background image */
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* Use object-fit to fit image within dimensions */
+}
